@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect} from "react";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+
+import {useFetchUsersQuery, useFetchProductsQuery} from "./redux/fetchApi";
+import {useAddProductMutation, useGetProductsQuery} from "./redux/productsApi";
+import Products from "./components/Products";
+import Orders from "./components/Orders";
+import Layout from "./components/layout";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const {data:initData = [], error} = useFetchProductsQuery();
+    const {data = []} = useGetProductsQuery()
+    const [addProduct, {error:createError}] = useAddProductMutation();
+
+    useEffect(() => {
+        const initProduct = async () => {
+            if (initData.products) {
+                for (const product of initData.products) {
+                    await addProduct({...product})
+                }
+            }
+        }
+        if(data.length === 0)
+        initProduct();
+    }, [data])
+
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Products />} />
+                    <Route path="orders" element={<Orders />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
