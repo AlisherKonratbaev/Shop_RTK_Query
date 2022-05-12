@@ -6,6 +6,7 @@ import {useAddProductMutation, useGetProductsQuery} from "./redux/productsApi";
 import Products from "./components/Products";
 import Orders from "./components/Orders";
 import Layout from "./components/layout";
+import ProductForm from "./components/ProductForm";
 
 function App() {
     const {data:initData = [], error} = useFetchProductsQuery();
@@ -30,6 +31,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Products />} />
+                    <Route path="productform" element={<ProductForm/>} />
                     <Route path="orders" element={<Orders />} />
                 </Route>
             </Routes>

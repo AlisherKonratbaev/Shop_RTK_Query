@@ -22,6 +22,11 @@ function Layout() {
                             </li>
                             <li>
                                 <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                                    <NavLink to="/productform">Product Form</NavLink>
+                                </Typography>
+                            </li>
+                            <li>
+                                <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                                     <NavLink to="/orders">Orders</NavLink>
                                 </Typography>
                             </li>
