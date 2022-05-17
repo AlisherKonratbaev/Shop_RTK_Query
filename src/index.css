@@ -26,3 +26,12 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+.product-form_change{
+  max-width: 100%;
+  margin:10px auto;
+  padding:20px;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

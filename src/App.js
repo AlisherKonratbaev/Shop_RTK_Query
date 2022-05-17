@@ -6,7 +6,7 @@ import {useAddProductMutation, useGetProductsQuery} from "./redux/productsApi";
 import Products from "./components/Products";
 import Orders from "./components/Orders";
 import Layout from "./components/layout";
-import ProductForm from "./components/ProductForm";
+import ProductForm from "./components/productForm/ProductForm";
 
 function App() {
     const {data:initData = [], error} = useFetchProductsQuery();

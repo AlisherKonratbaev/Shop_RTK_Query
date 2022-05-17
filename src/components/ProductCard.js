@@ -16,7 +16,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {useState} from "react";
 
 
-function ProductCard({product, deleteProduct}) {
+function ProductCard({product}) {
 
     const [state, setState] = useState(
         {
@@ -45,9 +45,7 @@ function ProductCard({product, deleteProduct}) {
         // setState({...state, open: true});
     }
 
-    const deleteProductHendler = async (product) => {
-        await deleteProduct(product);
-    }
+   
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -84,15 +82,6 @@ function ProductCard({product, deleteProduct}) {
                     addToCard(product)
                 }}>
                     <AddShoppingCartIcon/>
-                </IconButton>
-                <IconButton
-                    sx={{ml: "auto"}}
-                    aria-label="delete"
-                    onClick={() => {
-                        deleteProductHendler(product)
-                    }}
-                >
-                    <DeleteForeverIcon/>
                 </IconButton>
             </CardActions>
             <Snackbar anchorOrigin={{vertical, horizontal}} open={open} autoHideDuration={4000} onClose={handleClose}>

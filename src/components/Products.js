@@ -4,11 +4,11 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CircularProgress from '@mui/material/CircularProgress';
-import {useDeleteProductMutation, useGetProductsQuery} from "../redux/productsApi";
+import { useGetProductsQuery} from "../redux/productsApi";
 
 function Products() {
     const {data:products = [], isError, isLoading } = useGetProductsQuery()
-    const [deleteProduct] = useDeleteProductMutation();
+    
 
     return (
         <Container maxWidth="lg">
@@ -18,7 +18,7 @@ function Products() {
                 {isError  && <Typography variant="h5" align="center" sx={{mb: "50px", mt: "20px"}}>Error</Typography>}
                 {products?.map(product => {
                     return (
-                        <ProductCard key={product.id} product={product} deleteProduct={deleteProduct}/>
+                        <ProductCard key={product.id} product={product}/>
                     )
                 })}
             </Box>
