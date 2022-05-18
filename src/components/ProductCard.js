@@ -54,7 +54,7 @@ function ProductCard({product}) {
     };
 
     return (
-        <Card className="product_card" sx={{maxWidth: 345}}>
+        <Card className="product_card" sx={{maxWidth: 260}}>
             <CardMedia
                 component="img"
                 height="194"

@@ -10,7 +10,7 @@ export const productsApi = createApi({
                 url: 'products',
                 method: 'GET',
                 params: {
-                    _limit: limit
+                    _limit: limit,
                 }
             }),
             providesTags: result => ['Products']
@@ -37,8 +37,15 @@ export const productsApi = createApi({
                 body: product
             }),
             invalidatesTags: ['Products']
+        }),
+        searchProduct: build.query({
+            query: (text) => ({
+                url: `products?title=${text}`,
+                method: 'GET',
+            }),
+            providesTags: result => ['Products']
         })
     })
 })
 
-export const {useGetProductsQuery, useAddProductMutation, useDeleteProductMutation, useChangeProductMutation} = productsApi;
+export const {useGetProductsQuery, useAddProductMutation, useDeleteProductMutation, useChangeProductMutation, useSearchProductQuery} = productsApi;
