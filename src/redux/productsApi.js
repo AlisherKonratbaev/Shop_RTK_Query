@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 export const productsApi = createApi({
     reducerPath: "productsApi",
     tagTypes: ['Products'],
-    baseQuery: fetchBaseQuery({baseUrl:"https://serene-escarpment-81815.herokuapp.com"}),
+    baseQuery: fetchBaseQuery({baseUrl:"http://localhost:3001/"}),
     endpoints: (build) => ({
         getProducts: build.query({
             query: (limit = 30) => ({

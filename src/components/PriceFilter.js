@@ -23,8 +23,15 @@ export default function PriceFilter(props) {
     }, [products])
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        const filterProducts = products.filter(product => (newValue[0] <= product.price && product.price <= newValue[1]))
-        setProductsState([...filterProducts])
+        productsState.forEach(product => {
+            if(!product.isHide) {
+                if(newValue[0] <= product.price && product.price <= newValue[1]) {
+                    product.isHideFromPrice = false
+                } else product.isHideFromPrice = true
+            }
+        })
+
+        setProductsState([...productsState])
     };
 
     return (

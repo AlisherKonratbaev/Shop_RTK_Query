@@ -16,13 +16,22 @@ function Products() {
     const [productsState, setProductsState] = useState([])
 
     useEffect(() => {
-        setProductsState([...products])
+        const initProducts = JSON.parse(JSON.stringify(products))
+        initProducts.forEach(product => {
+            product.isHide = false;
+            product.isHideFromPrice = false;
+        });
+        setProductsState([...initProducts])
     }, [products])
 
     const searchHandler = (e) => {
         setText(e.target.value);
-        const findProducts = products.filter(product => product.title.toLowerCase().includes(e.target.value.toLowerCase() || ""))
-        setProductsState([...findProducts])
+        productsState.forEach(product => {
+            if(product.title.toLowerCase().includes(e.target.value.toLowerCase())) {
+                product.isHide = false
+            } else product.isHide = true
+        })
+        setProductsState([...productsState])
     }
     return (
         <Container maxWidth="lg">
@@ -40,12 +49,12 @@ function Products() {
 
                 <Box component='div' sx={{display: "flex", justifyContent: "space-between", flexWrap: "wrap", width:"100%"}}>
                     {isLoading && <CircularProgress sx={{m: "0 auto"}}/>}
-                    {isError &&
-                        <Typography variant="h5" align="center" sx={{mb: "50px", mt: "20px"}}>Error</Typography>}
+                    {isError && <Typography variant="h5" align="center" sx={{mb: "50px", mt: "20px"}}>Error</Typography>}
                     {productsState?.map(product => {
-                        return (
-                            <ProductCard key={product.id} product={product}/>
-                        )
+                        if(!product.isHide && !product.isHideFromPrice)
+                            return (
+                                <ProductCard key={product.id} product={product}/>
+                            )
                     })}
                 </Box>
 
