@@ -491,5 +491,13 @@
         "https://dummyjson.com/image/i/products/6/4.jpg"
       ]
     }
+  ],
+  "orders": [
+    {
+      "product_id": 1,
+      "count": 1,
+      "total_price": "1400",
+      "id": 1
+    }
   ]
 }

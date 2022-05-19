@@ -1,7 +1,5 @@
 import * as React from 'react';
-
 import Card from '@mui/material/Card';
-
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -12,40 +10,41 @@ import ShareIcon from '@mui/icons-material/Share';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {useState} from "react";
+
+import {useGetOrdersQuery, useAddOrderMutation, useChangeOrderMutation} from "../../redux/ordersApi";
 
 
 function ProductCard({product}) {
-
     const [state, setState] = useState(
         {
             open: false,
             vertical: 'bottom',
             horizontal: 'right',
         });
+    const [addOrder, {}] = useAddOrderMutation();
+    const {data:orders = []} = useGetOrdersQuery()
+    const [changeOrder, {}] = useChangeOrderMutation()
     const {vertical, horizontal, open} = state;
 
-    const addToCard = (product) => {
-        // const findOrder = orders.find(order => order.product_id === product.id)
-        // const newOrder = {
-        //     product_id: product.id,
-        //     count: 1,
-        //     total_price: product.price,
-        // }
-        //
-        // if (findOrder) {
-        //     newOrder.count = +findOrder.count + 1
-        //     newOrder.total_price = newOrder.count * product.price;
-        //     dispatch(changeOrder(newOrder))
-        //
-        // } else {
-        //     dispatch(addOrder(newOrder))
-        // }
-        // setState({...state, open: true});
+    const addOrderHandler = async (product) => {
+        const findOrder = orders.find(order => order.product_id === product.id)
+        const newOrder = {
+            product_id: product.id,
+            count: 1,
+            total_price: product.price,
+        }
+
+        if (findOrder) {
+            newOrder.count = +findOrder.count + 1
+            newOrder.total_price = newOrder.count * product.price;
+            changeOrder(newOrder)
+        } else {
+            addOrder(newOrder)
+        }
+        setState({...state, open: true});
     }
 
-   
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -79,7 +78,7 @@ function ProductCard({product}) {
                     <ShareIcon/>
                 </IconButton>
                 <IconButton onClick={() => {
-                    addToCard(product)
+                    addOrderHandler(product)
                 }}>
                     <AddShoppingCartIcon/>
                 </IconButton>
