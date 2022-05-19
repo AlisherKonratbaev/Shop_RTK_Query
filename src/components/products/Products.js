@@ -7,6 +7,7 @@ import {useGetProductsQuery} from "../../redux/productsApi";
 import {useEffect, useState} from "react";
 import PriceFilter from "./PriceFilter";
 import SearchProduct from "./SearchProduct";
+import CategoryFilter from "./CategoryFilter";
 
 function Products() {
     const {data: products = [], isError, isLoading} = useGetProductsQuery()
@@ -17,10 +18,15 @@ function Products() {
         initProducts.forEach(product => {
             product.isHide = false;
             product.isHideFromPrice = false;
+            product.isActive = true;
         });
         setProductsState([...initProducts])
     }, [products])
 
+    const getCategories = () => {
+        const allCategories = productsState.map(products => products.category);
+        return  Array.from(new Set(allCategories));
+    }
     return (
         <Container maxWidth="lg">
             <Typography variant="h3" align="center" sx={{mb: "50px", mt: "20px"}}>Продукты</Typography>
@@ -28,12 +34,13 @@ function Products() {
                 <Box component='div' sx={{width: "25%", mr: "30px", padding: "0 10px"}}>
                     <SearchProduct productsState={productsState} setProductsState={setProductsState} />
                     <PriceFilter products={products} productsState={productsState} setProductsState={setProductsState}/>
+                    <CategoryFilter productsState={productsState} setProductsState={setProductsState} categories={getCategories()} />
                 </Box>
                 <Box component='div' sx={{display: "flex", justifyContent: "space-between", flexWrap: "wrap", width:"100%"}}>
                     {isLoading && <CircularProgress sx={{m: "0 auto"}}/>}
                     {isError && <Typography variant="h5" align="center" sx={{mb: "50px", mt: "20px"}}>Error</Typography>}
                     {productsState?.map(product => {
-                        if(!product.isHide && !product.isHideFromPrice)
+                        if(!product.isHide && !product.isHideFromPrice && product.isActive)
                             return (
                                 <ProductCard key={product.id} product={product}/>
                             )

@@ -490,14 +490,58 @@
         "https://dummyjson.com/image/i/products/6/3.png",
         "https://dummyjson.com/image/i/products/6/4.jpg"
       ]
+    },
+    {
+      "id": 24,
+      "title": "cereals muesli fruit nuts",
+      "description": "original fauji cereal muesli 250gm box pack original fauji cereals muesli fruit nuts flakes breakfast cereal break fast faujicereals cerels cerel foji fouji",
+      "price": 46,
+      "discountPercentage": 16.8,
+      "rating": 4.94,
+      "stock": 113,
+      "brand": "fauji",
+      "category": "groceries",
+      "thumbnail": "https://dummyjson.com/image/i/products/24/thumbnail.jpg",
+      "images": [
+        "https://dummyjson.com/image/i/products/24/1.jpg",
+        "https://dummyjson.com/image/i/products/24/2.jpg",
+        "https://dummyjson.com/image/i/products/24/3.jpg",
+        "https://dummyjson.com/image/i/products/24/4.jpg",
+        "https://dummyjson.com/image/i/products/24/thumbnail.jpg"
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Handcraft Chinese style",
+      "description": "Handcraft Chinese style art luxury palace hotel villa mansion home decor ceramic vase with brass fruit plate",
+      "price": 60,
+      "discountPercentage": 15.34,
+      "rating": 4.44,
+      "stock": 7,
+      "brand": "luxury palace",
+      "category": "home-decoration",
+      "thumbnail": "https://dummyjson.com/image/i/products/29/thumbnail.webp",
+      "images": [
+        "https://dummyjson.com/image/i/products/29/1.jpg",
+        "https://dummyjson.com/image/i/products/29/2.jpg",
+        "https://dummyjson.com/image/i/products/29/3.webp",
+        "https://dummyjson.com/image/i/products/29/4.webp",
+        "https://dummyjson.com/image/i/products/29/thumbnail.webp"
+      ]
     }
   ],
   "orders": [
     {
-      "product_id": 1,
-      "count": 1,
-      "total_price": "1400",
-      "id": 1
+      "product_id": 2,
+      "count": "1",
+      "total_price": 899,
+      "id": 2
+    },
+    {
+      "product_id": 12,
+      "count": "2",
+      "total_price": 80,
+      "id": 4
     }
   ]
 }

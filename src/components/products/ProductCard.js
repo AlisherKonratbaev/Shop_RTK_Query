@@ -36,6 +36,7 @@ function ProductCard({product}) {
         }
 
         if (findOrder) {
+            newOrder.id = findOrder.id
             newOrder.count = +findOrder.count + 1
             newOrder.total_price = newOrder.count * product.price;
             changeOrder(newOrder)
