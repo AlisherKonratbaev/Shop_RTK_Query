@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import {useFetchUsersQuery, useFetchProductsQuery} from "./redux/fetchApi";
 import {useAddProductMutation, useGetProductsQuery} from "./redux/productsApi";
-import Products from "./components/Products";
+import Products from "./components/products/Products";
 import Orders from "./components/Orders";
 import Layout from "./components/layout";
 import ProductForm from "./components/productForm/ProductForm";

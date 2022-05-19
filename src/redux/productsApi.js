@@ -38,14 +38,7 @@ export const productsApi = createApi({
             }),
             invalidatesTags: ['Products']
         }),
-        searchProduct: build.query({
-            query: (text) => ({
-                url: `products?title=${text}`,
-                method: 'GET',
-            }),
-            providesTags: result => ['Products']
-        })
     })
 })
 
-export const {useGetProductsQuery, useAddProductMutation, useDeleteProductMutation, useChangeProductMutation, useSearchProductQuery} = productsApi;
+export const {useGetProductsQuery, useAddProductMutation, useDeleteProductMutation, useChangeProductMutation} = productsApi;
