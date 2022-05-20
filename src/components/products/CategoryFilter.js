@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -7,31 +7,41 @@ import Typography from "@mui/material/Typography";
 function CategoryFilter(props) {
     const {productsState, setProductsState, categories} = props;
     const [showAll, setShowAll] = useState(true);
+    const [activeCategories, setActiveCategories] = useState([]);
+
 
     const showCategoryHandle = (e, category) => {
-
-        productsState.forEach(product => {
-            if (product.category === category) {
-                product.isActive = e.target.checked
-            }
-        })
         setShowAll(false)
-        setProductsState([...productsState]);
+
+        if(e.target.checked) {
+            setActiveCategories([...activeCategories, category])
+        } else {
+            setActiveCategories(activeCategories.filter(cat => cat !== category))
+        }
     }
+
+    useEffect(() => {
+        if(!showAll) {
+            productsState.forEach(product => {
+                if(activeCategories.includes(product.category)) {
+                    product.isActive = true
+                } else product.isActive = false
+            })
+            setProductsState([...productsState])
+            if(activeCategories.length === 0) setShowAll(true)
+            else if(activeCategories.length == categories.length) setShowAll(true)
+        }
+    }, [activeCategories])
+
     useEffect(() => {
         if(showAll) {
             productsState.forEach(product => {
-                product.isActive = true
+                product.isActive = true;
             })
-            setProductsState([...productsState]);
+            setProductsState([...productsState])
+
         }
-        else {
-            productsState.forEach(product => {
-                product.isActive = false
-            })
-            setProductsState([...productsState]);
-        }
-    }, [setProductsState])
+    }, [showAll])
 
     const categoriesList = () => {
         return categories.map((category, index) => {
@@ -47,8 +57,13 @@ function CategoryFilter(props) {
             )
         })
     }
+
+    const showAllHandler = (e) => {
+        setShowAll(e.target.checked)
+    }
+
     return (
-        <FormGroup sx={{mt: "30px"}}>
+        <FormGroup sx={{mt: "30px"}} >
             <Typography variant="h5" component="h5">
                 Categories
             </Typography>
@@ -56,9 +71,7 @@ function CategoryFilter(props) {
                 control={<Checkbox/>}
                 label="All"
                 checked={showAll}
-                onChange={(e) => {
-                    setShowAll(e.target.checked)
-                }}
+                onChange={showAllHandler}
             />
             {categoriesList()}
         </FormGroup>

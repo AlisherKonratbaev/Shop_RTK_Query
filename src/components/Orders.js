@@ -32,7 +32,7 @@ function Orders() {
     }
 
     const deleteOrderHandler = (order) => {
-        deleteOrder(order.product_id)
+        deleteOrder(order.id)
     }
     return (
         <Container maxWidth="lg">
