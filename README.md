@@ -5,10 +5,10 @@ React web application, product store, implemented adding, removing, changing pro
 React, Redux, RTK Query
 
 ## Demo
-123
+https://rtk-query-shop.herokuapp.com/
 
 ## Technologies used
-React, Redux, React-Router-Dom, RTK Query, react-hooks, Javascript, html, css
+React, Redux RTK Query, React-Router-Dom, react-hooks, Javascript, html, css
 
 
 ## Getting Started with Create React App
